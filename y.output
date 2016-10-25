@@ -1,0 +1,2462 @@
+Terminals unused in grammar
+
+   TK_UNKNOWN
+   TK_COMMENT
+
+
+State 124 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: programa $end
+
+    1 programa: rep_definicao
+
+    2 rep_definicao: rep_definicao definicao
+    3              | definicao
+
+    4 definicao: def_variavel
+    5          | def_funcao
+
+    6 def_variavel: tipo lista_nomes TK_SEMICOLON
+
+    7 lista_nomes: TK_IDENTIFIER
+    8            | lista_nomes TK_COMMA TK_IDENTIFIER
+
+    9 tipo: tipo TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET
+   10     | tipo_base
+
+   11 tipo_base: TK_INT
+   12          | TK_CHAR
+   13          | TK_FLOAT
+   14          | TK_VOID
+
+   15 def_funcao: tipo TK_IDENTIFIER TK_OPEN_PARENTHESIS parametros TK_CLOSE_PARENTHESIS bloco
+
+   16 parametros: rep_parametros
+   17           | %empty
+
+   18 rep_parametros: rep_parametros TK_COMMA parametro
+   19               | parametro
+
+   20 parametro: tipo TK_IDENTIFIER
+
+   21 bloco: TK_OPEN_BRACKET rep_def_variavel rep_comando TK_CLOSE_BRACKET
+
+   22 rep_def_variavel: def_variavel rep_def_variavel
+   23                 | %empty
+
+   24 rep_comando: comando rep_comando
+   25            | %empty
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando opt_else
+   27        | TK_WHILE TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando
+   28        | var TK_ASSIGNMENT exp TK_SEMICOLON
+   29        | TK_RETURN opt_exp TK_SEMICOLON
+   30        | chamada TK_SEMICOLON
+   31        | bloco
+
+   32 var: TK_IDENTIFIER
+   33    | exp TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+
+   34 exp: TK_INTEGER
+   35    | TK_NUMBER_FLOAT
+   36    | TK_HEXADECIMAL
+   37    | TK_STRING
+   38    | var
+   39    | TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS
+   40    | chamada
+   41    | TK_NEW tipo TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   42    | exp_not
+   43    | exp_unary_minus
+   44    | exp_add
+   45    | exp_sub
+   46    | exp_mul
+   47    | exp_div
+   48    | exp_comp_eq
+   49    | exp_comp_less_eq
+   50    | exp_comp_greater_eq
+   51    | exp_comp_less
+   52    | exp_comp_greater
+   53    | exp_boolean_and
+   54    | exp_boolean_or
+
+   55 exp_not: TK_LOGICAL_NOT exp
+
+   56 exp_unary_minus: TK_OPERATOR_SUB exp
+
+   57 exp_add: exp TK_OPERATOR_ADD exp
+
+   58 exp_sub: exp TK_OPERATOR_SUB exp
+
+   59 exp_mul: exp TK_OPERATOR_MUL exp
+
+   60 exp_div: exp TK_OPERATOR_DIV exp
+
+   61 exp_comp_eq: exp TK_COMPARATOR_EQUAL exp
+
+   62 exp_comp_less_eq: exp TK_COMPARATOR_LESS_OR_EQ exp
+
+   63 exp_comp_greater_eq: exp TK_COMPARATOR_GREATER_OR_EQ exp
+
+   64 exp_comp_less: exp TK_COMPARATOR_LESS exp
+
+   65 exp_comp_greater: exp TK_COMPARATOR_GREATER exp
+
+   66 exp_boolean_and: exp TK_BOOLEAN_AND exp
+
+   67 exp_boolean_or: exp TK_BOOLEAN_OR exp
+
+   68 chamada: TK_IDENTIFIER TK_OPEN_PARENTHESIS lista_exp TK_CLOSE_PARENTHESIS
+
+   69 lista_exp: rep_exp
+   70          | %empty
+
+   71 rep_exp: exp
+   72        | rep_exp TK_COMMA exp
+
+   73 opt_else: TK_ELSE comando
+   74         | %empty
+
+   75 opt_exp: exp
+   76        | %empty
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+TK_UNKNOWN (258)
+TK_IDENTIFIER (259) 7 8 15 20 32 68
+TK_STRING (260) 37
+TK_COMMENT (261)
+TK_INTEGER (262) 34
+TK_HEXADECIMAL (263) 36
+TK_NUMBER_FLOAT (264) 35
+TK_LOGICAL_NOT (265) 55
+TK_OPERATOR_MUL (266) 59
+TK_OPERATOR_DIV (267) 60
+TK_OPERATOR_ADD (268) 57
+TK_OPERATOR_SUB (269) 56 58
+TK_COMPARATOR_LESS_OR_EQ (270) 62
+TK_COMPARATOR_LESS (271) 64
+TK_COMPARATOR_GREATER_OR_EQ (272) 63
+TK_COMPARATOR_GREATER (273) 65
+TK_COMPARATOR_EQUAL (274) 61
+TK_BOOLEAN_AND (275) 66
+TK_BOOLEAN_OR (276) 67
+TK_ASSIGNMENT (277) 28
+TK_SEMICOLON (278) 6 28 29 30
+TK_COMMA (279) 8 18 72
+TK_OPEN_BRACKET (280) 21
+TK_CLOSE_BRACKET (281) 21
+TK_OPEN_PARENTHESIS (282) 15 26 27 39 68
+TK_CLOSE_PARENTHESIS (283) 15 26 27 39 68
+TK_OPEN_SQR_BRACKET (284) 9 33 41
+TK_CLOSE_SQR_BRACKET (285) 9 33 41
+TK_CHAR (286) 12
+TK_ELSE (287) 73
+TK_FLOAT (288) 13
+TK_IF (289) 26
+TK_INT (290) 11
+TK_NEW (291) 41
+TK_RETURN (292) 29
+TK_VOID (293) 14
+TK_WHILE (294) 27
+
+
+Nonterminals, with rules where they appear
+
+$accept (40)
+    on left: 0
+programa (41)
+    on left: 1, on right: 0
+rep_definicao (42)
+    on left: 2 3, on right: 1 2
+definicao (43)
+    on left: 4 5, on right: 2 3
+def_variavel (44)
+    on left: 6, on right: 4 22
+lista_nomes (45)
+    on left: 7 8, on right: 6 8
+tipo (46)
+    on left: 9 10, on right: 6 9 15 20 41
+tipo_base (47)
+    on left: 11 12 13 14, on right: 10
+def_funcao (48)
+    on left: 15, on right: 5
+parametros (49)
+    on left: 16 17, on right: 15
+rep_parametros (50)
+    on left: 18 19, on right: 16 18
+parametro (51)
+    on left: 20, on right: 18 19
+bloco (52)
+    on left: 21, on right: 15 31
+rep_def_variavel (53)
+    on left: 22 23, on right: 21 22
+rep_comando (54)
+    on left: 24 25, on right: 21 24
+comando (55)
+    on left: 26 27 28 29 30 31, on right: 24 26 27 73
+var (56)
+    on left: 32 33, on right: 28 38
+exp (57)
+    on left: 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51
+    52 53 54, on right: 26 27 28 33 39 41 55 56 57 58 59 60 61 62 63
+    64 65 66 67 71 72 75
+exp_not (58)
+    on left: 55, on right: 42
+exp_unary_minus (59)
+    on left: 56, on right: 43
+exp_add (60)
+    on left: 57, on right: 44
+exp_sub (61)
+    on left: 58, on right: 45
+exp_mul (62)
+    on left: 59, on right: 46
+exp_div (63)
+    on left: 60, on right: 47
+exp_comp_eq (64)
+    on left: 61, on right: 48
+exp_comp_less_eq (65)
+    on left: 62, on right: 49
+exp_comp_greater_eq (66)
+    on left: 63, on right: 50
+exp_comp_less (67)
+    on left: 64, on right: 51
+exp_comp_greater (68)
+    on left: 65, on right: 52
+exp_boolean_and (69)
+    on left: 66, on right: 53
+exp_boolean_or (70)
+    on left: 67, on right: 54
+chamada (71)
+    on left: 68, on right: 30 40
+lista_exp (72)
+    on left: 69 70, on right: 68
+rep_exp (73)
+    on left: 71 72, on right: 69 72
+opt_else (74)
+    on left: 73 74, on right: 26
+opt_exp (75)
+    on left: 75 76, on right: 29
+
+
+State 0
+
+    0 $accept: . programa $end
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    programa       go to state 5
+    rep_definicao  go to state 6
+    definicao      go to state 7
+    def_variavel   go to state 8
+    tipo           go to state 9
+    tipo_base      go to state 10
+    def_funcao     go to state 11
+
+
+State 1
+
+   12 tipo_base: TK_CHAR .
+
+    $default  reduce using rule 12 (tipo_base)
+
+
+State 2
+
+   13 tipo_base: TK_FLOAT .
+
+    $default  reduce using rule 13 (tipo_base)
+
+
+State 3
+
+   11 tipo_base: TK_INT .
+
+    $default  reduce using rule 11 (tipo_base)
+
+
+State 4
+
+   14 tipo_base: TK_VOID .
+
+    $default  reduce using rule 14 (tipo_base)
+
+
+State 5
+
+    0 $accept: programa . $end
+
+    $end  shift, and go to state 12
+
+
+State 6
+
+    1 programa: rep_definicao .
+    2 rep_definicao: rep_definicao . definicao
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    $default  reduce using rule 1 (programa)
+
+    definicao     go to state 13
+    def_variavel  go to state 8
+    tipo          go to state 9
+    tipo_base     go to state 10
+    def_funcao    go to state 11
+
+
+State 7
+
+    3 rep_definicao: definicao .
+
+    $default  reduce using rule 3 (rep_definicao)
+
+
+State 8
+
+    4 definicao: def_variavel .
+
+    $default  reduce using rule 4 (definicao)
+
+
+State 9
+
+    6 def_variavel: tipo . lista_nomes TK_SEMICOLON
+    9 tipo: tipo . TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET
+   15 def_funcao: tipo . TK_IDENTIFIER TK_OPEN_PARENTHESIS parametros TK_CLOSE_PARENTHESIS bloco
+
+    TK_IDENTIFIER        shift, and go to state 14
+    TK_OPEN_SQR_BRACKET  shift, and go to state 15
+
+    lista_nomes  go to state 16
+
+
+State 10
+
+   10 tipo: tipo_base .
+
+    $default  reduce using rule 10 (tipo)
+
+
+State 11
+
+    5 definicao: def_funcao .
+
+    $default  reduce using rule 5 (definicao)
+
+
+State 12
+
+    0 $accept: programa $end .
+
+    $default  accept
+
+
+State 13
+
+    2 rep_definicao: rep_definicao definicao .
+
+    $default  reduce using rule 2 (rep_definicao)
+
+
+State 14
+
+    7 lista_nomes: TK_IDENTIFIER .
+   15 def_funcao: tipo TK_IDENTIFIER . TK_OPEN_PARENTHESIS parametros TK_CLOSE_PARENTHESIS bloco
+
+    TK_OPEN_PARENTHESIS  shift, and go to state 17
+
+    $default  reduce using rule 7 (lista_nomes)
+
+
+State 15
+
+    9 tipo: tipo TK_OPEN_SQR_BRACKET . TK_CLOSE_SQR_BRACKET
+
+    TK_CLOSE_SQR_BRACKET  shift, and go to state 18
+
+
+State 16
+
+    6 def_variavel: tipo lista_nomes . TK_SEMICOLON
+    8 lista_nomes: lista_nomes . TK_COMMA TK_IDENTIFIER
+
+    TK_SEMICOLON  shift, and go to state 19
+    TK_COMMA      shift, and go to state 20
+
+
+State 17
+
+   15 def_funcao: tipo TK_IDENTIFIER TK_OPEN_PARENTHESIS . parametros TK_CLOSE_PARENTHESIS bloco
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    $default  reduce using rule 17 (parametros)
+
+    tipo            go to state 21
+    tipo_base       go to state 10
+    parametros      go to state 22
+    rep_parametros  go to state 23
+    parametro       go to state 24
+
+
+State 18
+
+    9 tipo: tipo TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET .
+
+    $default  reduce using rule 9 (tipo)
+
+
+State 19
+
+    6 def_variavel: tipo lista_nomes TK_SEMICOLON .
+
+    $default  reduce using rule 6 (def_variavel)
+
+
+State 20
+
+    8 lista_nomes: lista_nomes TK_COMMA . TK_IDENTIFIER
+
+    TK_IDENTIFIER  shift, and go to state 25
+
+
+State 21
+
+    9 tipo: tipo . TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET
+   20 parametro: tipo . TK_IDENTIFIER
+
+    TK_IDENTIFIER        shift, and go to state 26
+    TK_OPEN_SQR_BRACKET  shift, and go to state 15
+
+
+State 22
+
+   15 def_funcao: tipo TK_IDENTIFIER TK_OPEN_PARENTHESIS parametros . TK_CLOSE_PARENTHESIS bloco
+
+    TK_CLOSE_PARENTHESIS  shift, and go to state 27
+
+
+State 23
+
+   16 parametros: rep_parametros .
+   18 rep_parametros: rep_parametros . TK_COMMA parametro
+
+    TK_COMMA  shift, and go to state 28
+
+    $default  reduce using rule 16 (parametros)
+
+
+State 24
+
+   19 rep_parametros: parametro .
+
+    $default  reduce using rule 19 (rep_parametros)
+
+
+State 25
+
+    8 lista_nomes: lista_nomes TK_COMMA TK_IDENTIFIER .
+
+    $default  reduce using rule 8 (lista_nomes)
+
+
+State 26
+
+   20 parametro: tipo TK_IDENTIFIER .
+
+    $default  reduce using rule 20 (parametro)
+
+
+State 27
+
+   15 def_funcao: tipo TK_IDENTIFIER TK_OPEN_PARENTHESIS parametros TK_CLOSE_PARENTHESIS . bloco
+
+    TK_OPEN_BRACKET  shift, and go to state 29
+
+    bloco  go to state 30
+
+
+State 28
+
+   18 rep_parametros: rep_parametros TK_COMMA . parametro
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    tipo       go to state 21
+    tipo_base  go to state 10
+    parametro  go to state 31
+
+
+State 29
+
+   21 bloco: TK_OPEN_BRACKET . rep_def_variavel rep_comando TK_CLOSE_BRACKET
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    $default  reduce using rule 23 (rep_def_variavel)
+
+    def_variavel      go to state 32
+    tipo              go to state 33
+    tipo_base         go to state 10
+    rep_def_variavel  go to state 34
+
+
+State 30
+
+   15 def_funcao: tipo TK_IDENTIFIER TK_OPEN_PARENTHESIS parametros TK_CLOSE_PARENTHESIS bloco .
+
+    $default  reduce using rule 15 (def_funcao)
+
+
+State 31
+
+   18 rep_parametros: rep_parametros TK_COMMA parametro .
+
+    $default  reduce using rule 18 (rep_parametros)
+
+
+State 32
+
+   22 rep_def_variavel: def_variavel . rep_def_variavel
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    $default  reduce using rule 23 (rep_def_variavel)
+
+    def_variavel      go to state 32
+    tipo              go to state 33
+    tipo_base         go to state 10
+    rep_def_variavel  go to state 35
+
+
+State 33
+
+    6 def_variavel: tipo . lista_nomes TK_SEMICOLON
+    9 tipo: tipo . TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET
+
+    TK_IDENTIFIER        shift, and go to state 36
+    TK_OPEN_SQR_BRACKET  shift, and go to state 15
+
+    lista_nomes  go to state 16
+
+
+State 34
+
+   21 bloco: TK_OPEN_BRACKET rep_def_variavel . rep_comando TK_CLOSE_BRACKET
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_BRACKET      shift, and go to state 29
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_IF                shift, and go to state 45
+    TK_NEW               shift, and go to state 46
+    TK_RETURN            shift, and go to state 47
+    TK_WHILE             shift, and go to state 48
+
+    $default  reduce using rule 25 (rep_comando)
+
+    bloco                go to state 49
+    rep_comando          go to state 50
+    comando              go to state 51
+    var                  go to state 52
+    exp                  go to state 53
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 67
+
+
+State 35
+
+   22 rep_def_variavel: def_variavel rep_def_variavel .
+
+    $default  reduce using rule 22 (rep_def_variavel)
+
+
+State 36
+
+    7 lista_nomes: TK_IDENTIFIER .
+
+    $default  reduce using rule 7 (lista_nomes)
+
+
+State 37
+
+   32 var: TK_IDENTIFIER .
+   68 chamada: TK_IDENTIFIER . TK_OPEN_PARENTHESIS lista_exp TK_CLOSE_PARENTHESIS
+
+    TK_OPEN_PARENTHESIS  shift, and go to state 68
+
+    $default  reduce using rule 32 (var)
+
+
+State 38
+
+   37 exp: TK_STRING .
+
+    $default  reduce using rule 37 (exp)
+
+
+State 39
+
+   34 exp: TK_INTEGER .
+
+    $default  reduce using rule 34 (exp)
+
+
+State 40
+
+   36 exp: TK_HEXADECIMAL .
+
+    $default  reduce using rule 36 (exp)
+
+
+State 41
+
+   35 exp: TK_NUMBER_FLOAT .
+
+    $default  reduce using rule 35 (exp)
+
+
+State 42
+
+   55 exp_not: TK_LOGICAL_NOT . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 70
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 43
+
+   56 exp_unary_minus: TK_OPERATOR_SUB . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 72
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 44
+
+   39 exp: TK_OPEN_PARENTHESIS . exp TK_CLOSE_PARENTHESIS
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 73
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 45
+
+   26 comando: TK_IF . TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando opt_else
+
+    TK_OPEN_PARENTHESIS  shift, and go to state 74
+
+
+State 46
+
+   41 exp: TK_NEW . tipo TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+
+    TK_CHAR   shift, and go to state 1
+    TK_FLOAT  shift, and go to state 2
+    TK_INT    shift, and go to state 3
+    TK_VOID   shift, and go to state 4
+
+    tipo       go to state 75
+    tipo_base  go to state 10
+
+
+State 47
+
+   29 comando: TK_RETURN . opt_exp TK_SEMICOLON
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    $default  reduce using rule 76 (opt_exp)
+
+    var                  go to state 69
+    exp                  go to state 76
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+    opt_exp              go to state 77
+
+
+State 48
+
+   27 comando: TK_WHILE . TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando
+
+    TK_OPEN_PARENTHESIS  shift, and go to state 78
+
+
+State 49
+
+   31 comando: bloco .
+
+    $default  reduce using rule 31 (comando)
+
+
+State 50
+
+   21 bloco: TK_OPEN_BRACKET rep_def_variavel rep_comando . TK_CLOSE_BRACKET
+
+    TK_CLOSE_BRACKET  shift, and go to state 79
+
+
+State 51
+
+   24 rep_comando: comando . rep_comando
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_BRACKET      shift, and go to state 29
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_IF                shift, and go to state 45
+    TK_NEW               shift, and go to state 46
+    TK_RETURN            shift, and go to state 47
+    TK_WHILE             shift, and go to state 48
+
+    $default  reduce using rule 25 (rep_comando)
+
+    bloco                go to state 49
+    rep_comando          go to state 80
+    comando              go to state 51
+    var                  go to state 52
+    exp                  go to state 53
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 67
+
+
+State 52
+
+   28 comando: var . TK_ASSIGNMENT exp TK_SEMICOLON
+   38 exp: var .
+
+    TK_ASSIGNMENT  shift, and go to state 81
+
+    $default  reduce using rule 38 (exp)
+
+
+State 53
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+
+State 54
+
+   42 exp: exp_not .
+
+    $default  reduce using rule 42 (exp)
+
+
+State 55
+
+   43 exp: exp_unary_minus .
+
+    $default  reduce using rule 43 (exp)
+
+
+State 56
+
+   44 exp: exp_add .
+
+    $default  reduce using rule 44 (exp)
+
+
+State 57
+
+   45 exp: exp_sub .
+
+    $default  reduce using rule 45 (exp)
+
+
+State 58
+
+   46 exp: exp_mul .
+
+    $default  reduce using rule 46 (exp)
+
+
+State 59
+
+   47 exp: exp_div .
+
+    $default  reduce using rule 47 (exp)
+
+
+State 60
+
+   48 exp: exp_comp_eq .
+
+    $default  reduce using rule 48 (exp)
+
+
+State 61
+
+   49 exp: exp_comp_less_eq .
+
+    $default  reduce using rule 49 (exp)
+
+
+State 62
+
+   50 exp: exp_comp_greater_eq .
+
+    $default  reduce using rule 50 (exp)
+
+
+State 63
+
+   51 exp: exp_comp_less .
+
+    $default  reduce using rule 51 (exp)
+
+
+State 64
+
+   52 exp: exp_comp_greater .
+
+    $default  reduce using rule 52 (exp)
+
+
+State 65
+
+   53 exp: exp_boolean_and .
+
+    $default  reduce using rule 53 (exp)
+
+
+State 66
+
+   54 exp: exp_boolean_or .
+
+    $default  reduce using rule 54 (exp)
+
+
+State 67
+
+   30 comando: chamada . TK_SEMICOLON
+   40 exp: chamada .
+
+    TK_SEMICOLON  shift, and go to state 94
+
+    $default  reduce using rule 40 (exp)
+
+
+State 68
+
+   68 chamada: TK_IDENTIFIER TK_OPEN_PARENTHESIS . lista_exp TK_CLOSE_PARENTHESIS
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    $default  reduce using rule 70 (lista_exp)
+
+    var                  go to state 69
+    exp                  go to state 95
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+    lista_exp            go to state 96
+    rep_exp              go to state 97
+
+
+State 69
+
+   38 exp: var .
+
+    $default  reduce using rule 38 (exp)
+
+
+State 70
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   55 exp_not: TK_LOGICAL_NOT exp .
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 55 (exp_not)
+
+
+State 71
+
+   40 exp: chamada .
+
+    $default  reduce using rule 40 (exp)
+
+
+State 72
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   56 exp_unary_minus: TK_OPERATOR_SUB exp .
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 56 (exp_unary_minus)
+
+
+State 73
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   39 exp: TK_OPEN_PARENTHESIS exp . TK_CLOSE_PARENTHESIS
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_CLOSE_PARENTHESIS         shift, and go to state 98
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+
+State 74
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS . exp TK_CLOSE_PARENTHESIS comando opt_else
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 99
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 75
+
+    9 tipo: tipo . TK_OPEN_SQR_BRACKET TK_CLOSE_SQR_BRACKET
+   41 exp: TK_NEW tipo . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+
+    TK_OPEN_SQR_BRACKET  shift, and go to state 100
+
+
+State 76
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+   75 opt_exp: exp .
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+    $default  reduce using rule 75 (opt_exp)
+
+
+State 77
+
+   29 comando: TK_RETURN opt_exp . TK_SEMICOLON
+
+    TK_SEMICOLON  shift, and go to state 101
+
+
+State 78
+
+   27 comando: TK_WHILE TK_OPEN_PARENTHESIS . exp TK_CLOSE_PARENTHESIS comando
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 102
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 79
+
+   21 bloco: TK_OPEN_BRACKET rep_def_variavel rep_comando TK_CLOSE_BRACKET .
+
+    $default  reduce using rule 21 (bloco)
+
+
+State 80
+
+   24 rep_comando: comando rep_comando .
+
+    $default  reduce using rule 24 (rep_comando)
+
+
+State 81
+
+   28 comando: var TK_ASSIGNMENT . exp TK_SEMICOLON
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 103
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 82
+
+   59 exp_mul: exp TK_OPERATOR_MUL . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 104
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 83
+
+   60 exp_div: exp TK_OPERATOR_DIV . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 105
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 84
+
+   57 exp_add: exp TK_OPERATOR_ADD . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 106
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 85
+
+   58 exp_sub: exp TK_OPERATOR_SUB . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 107
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 86
+
+   62 exp_comp_less_eq: exp TK_COMPARATOR_LESS_OR_EQ . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 108
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 87
+
+   64 exp_comp_less: exp TK_COMPARATOR_LESS . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 109
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 88
+
+   63 exp_comp_greater_eq: exp TK_COMPARATOR_GREATER_OR_EQ . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 110
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 89
+
+   65 exp_comp_greater: exp TK_COMPARATOR_GREATER . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 111
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 90
+
+   61 exp_comp_eq: exp TK_COMPARATOR_EQUAL . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 112
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 91
+
+   66 exp_boolean_and: exp TK_BOOLEAN_AND . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 113
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 92
+
+   67 exp_boolean_or: exp TK_BOOLEAN_OR . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 114
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 93
+
+   33 var: exp TK_OPEN_SQR_BRACKET . exp TK_CLOSE_SQR_BRACKET
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 115
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 94
+
+   30 comando: chamada TK_SEMICOLON .
+
+    $default  reduce using rule 30 (comando)
+
+
+State 95
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+   71 rep_exp: exp .
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+    $default  reduce using rule 71 (rep_exp)
+
+
+State 96
+
+   68 chamada: TK_IDENTIFIER TK_OPEN_PARENTHESIS lista_exp . TK_CLOSE_PARENTHESIS
+
+    TK_CLOSE_PARENTHESIS  shift, and go to state 116
+
+
+State 97
+
+   69 lista_exp: rep_exp .
+   72 rep_exp: rep_exp . TK_COMMA exp
+
+    TK_COMMA  shift, and go to state 117
+
+    $default  reduce using rule 69 (lista_exp)
+
+
+State 98
+
+   39 exp: TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 39 (exp)
+
+
+State 99
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS exp . TK_CLOSE_PARENTHESIS comando opt_else
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_CLOSE_PARENTHESIS         shift, and go to state 118
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+
+State 100
+
+    9 tipo: tipo TK_OPEN_SQR_BRACKET . TK_CLOSE_SQR_BRACKET
+   41 exp: TK_NEW tipo TK_OPEN_SQR_BRACKET . exp TK_CLOSE_SQR_BRACKET
+
+    TK_IDENTIFIER         shift, and go to state 37
+    TK_STRING             shift, and go to state 38
+    TK_INTEGER            shift, and go to state 39
+    TK_HEXADECIMAL        shift, and go to state 40
+    TK_NUMBER_FLOAT       shift, and go to state 41
+    TK_LOGICAL_NOT        shift, and go to state 42
+    TK_OPERATOR_SUB       shift, and go to state 43
+    TK_OPEN_PARENTHESIS   shift, and go to state 44
+    TK_CLOSE_SQR_BRACKET  shift, and go to state 18
+    TK_NEW                shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 119
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 101
+
+   29 comando: TK_RETURN opt_exp TK_SEMICOLON .
+
+    $default  reduce using rule 29 (comando)
+
+
+State 102
+
+   27 comando: TK_WHILE TK_OPEN_PARENTHESIS exp . TK_CLOSE_PARENTHESIS comando
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_CLOSE_PARENTHESIS         shift, and go to state 120
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+
+State 103
+
+   28 comando: var TK_ASSIGNMENT exp . TK_SEMICOLON
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_SEMICOLON                 shift, and go to state 121
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+
+State 104
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   59        | exp TK_OPERATOR_MUL exp .
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 59 (exp_mul)
+
+
+State 105
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   60        | exp TK_OPERATOR_DIV exp .
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 60 (exp_div)
+
+
+State 106
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   57        | exp TK_OPERATOR_ADD exp .
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 57 (exp_add)
+
+
+State 107
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   58        | exp TK_OPERATOR_SUB exp .
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 58 (exp_sub)
+
+
+State 108
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   62                 | exp TK_COMPARATOR_LESS_OR_EQ exp .
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 62 (exp_comp_less_eq)
+
+
+State 109
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   64              | exp TK_COMPARATOR_LESS exp .
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+
+    $default  reduce using rule 64 (exp_comp_less)
+
+
+State 110
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   63                    | exp TK_COMPARATOR_GREATER_OR_EQ exp .
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_EQUAL  shift, and go to state 90
+    TK_BOOLEAN_AND       shift, and go to state 91
+    TK_BOOLEAN_OR        shift, and go to state 92
+
+    $default  reduce using rule 63 (exp_comp_greater_eq)
+
+
+State 111
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   65                 | exp TK_COMPARATOR_GREATER exp .
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_COMPARATOR_EQUAL  shift, and go to state 90
+    TK_BOOLEAN_AND       shift, and go to state 91
+    TK_BOOLEAN_OR        shift, and go to state 92
+
+    $default  reduce using rule 65 (exp_comp_greater)
+
+
+State 112
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   61            | exp TK_COMPARATOR_EQUAL exp .
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_BOOLEAN_AND  shift, and go to state 91
+    TK_BOOLEAN_OR   shift, and go to state 92
+
+    $default  reduce using rule 61 (exp_comp_eq)
+
+
+State 113
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   66                | exp TK_BOOLEAN_AND exp .
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_BOOLEAN_OR  shift, and go to state 92
+
+    $default  reduce using rule 66 (exp_boolean_and)
+
+
+State 114
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+   67               | exp TK_BOOLEAN_OR exp .
+
+    $default  reduce using rule 67 (exp_boolean_or)
+
+
+State 115
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   33    | exp TK_OPEN_SQR_BRACKET exp . TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+    TK_CLOSE_SQR_BRACKET         shift, and go to state 122
+
+
+State 116
+
+   68 chamada: TK_IDENTIFIER TK_OPEN_PARENTHESIS lista_exp TK_CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 68 (chamada)
+
+
+State 117
+
+   72 rep_exp: rep_exp TK_COMMA . exp
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_NEW               shift, and go to state 46
+
+    var                  go to state 69
+    exp                  go to state 123
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 71
+
+
+State 118
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS . comando opt_else
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_BRACKET      shift, and go to state 29
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_IF                shift, and go to state 45
+    TK_NEW               shift, and go to state 46
+    TK_RETURN            shift, and go to state 47
+    TK_WHILE             shift, and go to state 48
+
+    bloco                go to state 49
+    comando              go to state 124
+    var                  go to state 52
+    exp                  go to state 53
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 67
+
+
+State 119
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   41 exp: TK_NEW tipo TK_OPEN_SQR_BRACKET exp . TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+    TK_CLOSE_SQR_BRACKET         shift, and go to state 125
+
+
+State 120
+
+   27 comando: TK_WHILE TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS . comando
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_BRACKET      shift, and go to state 29
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_IF                shift, and go to state 45
+    TK_NEW               shift, and go to state 46
+    TK_RETURN            shift, and go to state 47
+    TK_WHILE             shift, and go to state 48
+
+    bloco                go to state 49
+    comando              go to state 126
+    var                  go to state 52
+    exp                  go to state 53
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 67
+
+
+State 121
+
+   28 comando: var TK_ASSIGNMENT exp TK_SEMICOLON .
+
+    $default  reduce using rule 28 (comando)
+
+
+State 122
+
+   33 var: exp TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET .
+
+    $default  reduce using rule 33 (var)
+
+
+State 123
+
+   33 var: exp . TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET
+   57 exp_add: exp . TK_OPERATOR_ADD exp
+   58 exp_sub: exp . TK_OPERATOR_SUB exp
+   59 exp_mul: exp . TK_OPERATOR_MUL exp
+   60 exp_div: exp . TK_OPERATOR_DIV exp
+   61 exp_comp_eq: exp . TK_COMPARATOR_EQUAL exp
+   62 exp_comp_less_eq: exp . TK_COMPARATOR_LESS_OR_EQ exp
+   63 exp_comp_greater_eq: exp . TK_COMPARATOR_GREATER_OR_EQ exp
+   64 exp_comp_less: exp . TK_COMPARATOR_LESS exp
+   65 exp_comp_greater: exp . TK_COMPARATOR_GREATER exp
+   66 exp_boolean_and: exp . TK_BOOLEAN_AND exp
+   67 exp_boolean_or: exp . TK_BOOLEAN_OR exp
+   72 rep_exp: rep_exp TK_COMMA exp .
+
+    TK_OPERATOR_MUL              shift, and go to state 82
+    TK_OPERATOR_DIV              shift, and go to state 83
+    TK_OPERATOR_ADD              shift, and go to state 84
+    TK_OPERATOR_SUB              shift, and go to state 85
+    TK_COMPARATOR_LESS_OR_EQ     shift, and go to state 86
+    TK_COMPARATOR_LESS           shift, and go to state 87
+    TK_COMPARATOR_GREATER_OR_EQ  shift, and go to state 88
+    TK_COMPARATOR_GREATER        shift, and go to state 89
+    TK_COMPARATOR_EQUAL          shift, and go to state 90
+    TK_BOOLEAN_AND               shift, and go to state 91
+    TK_BOOLEAN_OR                shift, and go to state 92
+    TK_OPEN_SQR_BRACKET          shift, and go to state 93
+
+    $default  reduce using rule 72 (rep_exp)
+
+
+State 124
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando . opt_else
+
+    TK_ELSE  shift, and go to state 127
+
+    TK_ELSE   [reduce using rule 74 (opt_else)]
+    $default  reduce using rule 74 (opt_else)
+
+    opt_else  go to state 128
+
+
+State 125
+
+   41 exp: TK_NEW tipo TK_OPEN_SQR_BRACKET exp TK_CLOSE_SQR_BRACKET .
+
+    $default  reduce using rule 41 (exp)
+
+
+State 126
+
+   27 comando: TK_WHILE TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando .
+
+    $default  reduce using rule 27 (comando)
+
+
+State 127
+
+   73 opt_else: TK_ELSE . comando
+
+    TK_IDENTIFIER        shift, and go to state 37
+    TK_STRING            shift, and go to state 38
+    TK_INTEGER           shift, and go to state 39
+    TK_HEXADECIMAL       shift, and go to state 40
+    TK_NUMBER_FLOAT      shift, and go to state 41
+    TK_LOGICAL_NOT       shift, and go to state 42
+    TK_OPERATOR_SUB      shift, and go to state 43
+    TK_OPEN_BRACKET      shift, and go to state 29
+    TK_OPEN_PARENTHESIS  shift, and go to state 44
+    TK_IF                shift, and go to state 45
+    TK_NEW               shift, and go to state 46
+    TK_RETURN            shift, and go to state 47
+    TK_WHILE             shift, and go to state 48
+
+    bloco                go to state 49
+    comando              go to state 129
+    var                  go to state 52
+    exp                  go to state 53
+    exp_not              go to state 54
+    exp_unary_minus      go to state 55
+    exp_add              go to state 56
+    exp_sub              go to state 57
+    exp_mul              go to state 58
+    exp_div              go to state 59
+    exp_comp_eq          go to state 60
+    exp_comp_less_eq     go to state 61
+    exp_comp_greater_eq  go to state 62
+    exp_comp_less        go to state 63
+    exp_comp_greater     go to state 64
+    exp_boolean_and      go to state 65
+    exp_boolean_or       go to state 66
+    chamada              go to state 67
+
+
+State 128
+
+   26 comando: TK_IF TK_OPEN_PARENTHESIS exp TK_CLOSE_PARENTHESIS comando opt_else .
+
+    $default  reduce using rule 26 (comando)
+
+
+State 129
+
+   73 opt_else: TK_ELSE comando .
+
+    $default  reduce using rule 73 (opt_else)
