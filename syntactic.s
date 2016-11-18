@@ -5,6 +5,7 @@
 	#include"lexical.h"	
 	#include"tree_structure.h"
 	#include"struct_manipulation.h"
+	#include"struct_print.h"
 	extern Programa* prog;
 	extern int yylineno;
 %}
@@ -329,7 +330,7 @@ Info_t info;
 Programa* prog;
 int main (void) {
 	yyparse();
-	//printPrograma(prog);
+	printPrograma(prog,0);
 	return 0;
 }
 yyerror(s) char *s; {

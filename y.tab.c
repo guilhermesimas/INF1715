@@ -70,10 +70,11 @@
 	#include"lexical.h"	
 	#include"tree_structure.h"
 	#include"struct_manipulation.h"
+	#include"struct_print.h"
 	extern Programa* prog;
 	extern int yylineno;
 
-#line 77 "y.tab.c" /* yacc.c:339  */
+#line 78 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -202,7 +203,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 206 "y.tab.c" /* yacc.c:358  */
+#line 207 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -503,14 +504,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    66,    66,    69,    72,    77,    79,    82,    85,    92,
-      98,   100,   103,   105,   107,   109,   112,   118,   120,   122,
-     125,   130,   136,   140,   143,   146,   149,   152,   162,   166,
-     170,   180,   184,   188,   192,   195,   200,   205,   211,   215,
-     218,   220,   222,   225,   227,   229,   231,   233,   235,   237,
-     239,   241,   243,   245,   247,   249,   253,   256,   259,   262,
-     265,   268,   271,   274,   277,   280,   283,   286,   289,   293,
-     300,   302,   305,   309,   313,   315,   318,   320
+       0,    67,    67,    70,    73,    78,    80,    83,    86,    93,
+      99,   101,   104,   106,   108,   110,   113,   119,   121,   123,
+     126,   131,   137,   141,   144,   147,   150,   153,   163,   167,
+     171,   181,   185,   189,   193,   196,   201,   206,   212,   216,
+     219,   221,   223,   226,   228,   230,   232,   234,   236,   238,
+     240,   242,   244,   246,   248,   250,   254,   257,   260,   263,
+     266,   269,   272,   275,   278,   281,   284,   287,   290,   294,
+     301,   303,   306,   310,   314,   316,   319,   321
 };
 #endif
 
@@ -1410,52 +1411,52 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 66 "syntactic.s" /* yacc.c:1646  */
+#line 67 "syntactic.s" /* yacc.c:1646  */
     {	prog =	createPrograma((yyvsp[0])) ;
 								(yyval) = prog;}
-#line 1417 "y.tab.c" /* yacc.c:1646  */
+#line 1418 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 69 "syntactic.s" /* yacc.c:1646  */
+#line 70 "syntactic.s" /* yacc.c:1646  */
     {printf("REP DEFINICAO\n");
 											addLista((Lista*)(yyvsp[-1]),(void*)(yyvsp[0]));
 												(yyval)=(int)(yyvsp[-1]);}
-#line 1425 "y.tab.c" /* yacc.c:1646  */
+#line 1426 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 72 "syntactic.s" /* yacc.c:1646  */
+#line 73 "syntactic.s" /* yacc.c:1646  */
     {printf("DEFINICAO\n");
 							Lista* lst = createLista();
 							addLista(lst,(void*)(yyvsp[0]));
 							(yyval)=(int)lst;}
-#line 1434 "y.tab.c" /* yacc.c:1646  */
+#line 1435 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 77 "syntactic.s" /* yacc.c:1646  */
+#line 78 "syntactic.s" /* yacc.c:1646  */
     {printf("DEF_VARIAVEL 1\n");
 							(yyval)=(int)createDefinicao(DEF_VAR,(void*)(yyvsp[0]));}
-#line 1441 "y.tab.c" /* yacc.c:1646  */
+#line 1442 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 79 "syntactic.s" /* yacc.c:1646  */
+#line 80 "syntactic.s" /* yacc.c:1646  */
     {printf("DEF_FUNCAO\n");
 							(yyval)=(int)createDefinicao(DEF_FUNC,(void*)(yyvsp[0]));}
-#line 1448 "y.tab.c" /* yacc.c:1646  */
+#line 1449 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 82 "syntactic.s" /* yacc.c:1646  */
+#line 83 "syntactic.s" /* yacc.c:1646  */
     {printf("DEF_VARIAVEL 2\n");
 												(yyval)=(int)createDefinicaoVariavel((Type*)(yyvsp[-2]),(Lista*)(yyvsp[-1]));}
-#line 1455 "y.tab.c" /* yacc.c:1646  */
+#line 1456 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 85 "syntactic.s" /* yacc.c:1646  */
+#line 86 "syntactic.s" /* yacc.c:1646  */
     {printf("LISTA NOMES 1\n");
 							char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 							strcpy(str,info.s);
@@ -1463,149 +1464,149 @@ yyreduce:
 							addLista(lst,str);
 							(yyval)=(int)lst;
 							}
-#line 1467 "y.tab.c" /* yacc.c:1646  */
+#line 1468 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 92 "syntactic.s" /* yacc.c:1646  */
+#line 93 "syntactic.s" /* yacc.c:1646  */
     {printf("LISTA NOMES 2\n");
 													char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 													strcpy(str,info.s);
 													addLista((Lista*)(yyvsp[-2]),str);
 													(yyval)=(int)(yyvsp[-2]);}
-#line 1477 "y.tab.c" /* yacc.c:1646  */
+#line 1478 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 98 "syntactic.s" /* yacc.c:1646  */
+#line 99 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO []\n");
 															(yyval)=(int)createType(1,(void*)(yyvsp[-2]));}
-#line 1484 "y.tab.c" /* yacc.c:1646  */
+#line 1485 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 100 "syntactic.s" /* yacc.c:1646  */
+#line 101 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO_BASE\n");
 						(yyval)=(int)createType(0,(void*)(yyvsp[0]));}
-#line 1491 "y.tab.c" /* yacc.c:1646  */
+#line 1492 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 103 "syntactic.s" /* yacc.c:1646  */
+#line 104 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO BASE INT\n");
 				(yyval)=(yyvsp[0]);}
-#line 1498 "y.tab.c" /* yacc.c:1646  */
+#line 1499 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 105 "syntactic.s" /* yacc.c:1646  */
+#line 106 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO BASE CHAR\n");
 				(yyval)=(yyvsp[0]);}
-#line 1505 "y.tab.c" /* yacc.c:1646  */
+#line 1506 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 107 "syntactic.s" /* yacc.c:1646  */
+#line 108 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO BASE FLOAT\n");
 				(yyval)=(yyvsp[0]);}
-#line 1512 "y.tab.c" /* yacc.c:1646  */
+#line 1513 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 109 "syntactic.s" /* yacc.c:1646  */
+#line 110 "syntactic.s" /* yacc.c:1646  */
     {printf("TIPO VOID\n");
 				(yyval)=(yyvsp[0]);}
-#line 1519 "y.tab.c" /* yacc.c:1646  */
+#line 1520 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 113 "syntactic.s" /* yacc.c:1646  */
+#line 114 "syntactic.s" /* yacc.c:1646  */
     {printf("DEF DEF_FUNCAO\n");
 				char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 				strcpy(str,info.s);
 				(yyval)=(int)createDefinicaoFuncao((Type*)(yyvsp[-5]),str,(Lista*)(yyvsp[-2]),(Bloco*)(yyvsp[0]));}
-#line 1528 "y.tab.c" /* yacc.c:1646  */
+#line 1529 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 118 "syntactic.s" /* yacc.c:1646  */
+#line 119 "syntactic.s" /* yacc.c:1646  */
     {printf("PARAMETROS 1\n");
 				(yyval)=(int)(yyvsp[0]);}
-#line 1535 "y.tab.c" /* yacc.c:1646  */
+#line 1536 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 120 "syntactic.s" /* yacc.c:1646  */
+#line 121 "syntactic.s" /* yacc.c:1646  */
     {printf("PARAMETROS 2\n");}
-#line 1541 "y.tab.c" /* yacc.c:1646  */
+#line 1542 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 122 "syntactic.s" /* yacc.c:1646  */
+#line 123 "syntactic.s" /* yacc.c:1646  */
     {printf("REP PARAMETROS 2\n");
 													addLista((Lista*)(yyvsp[-2]),(void*)(yyvsp[0]));
 													(yyval)=(int)(yyvsp[-2]);}
-#line 1549 "y.tab.c" /* yacc.c:1646  */
+#line 1550 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 125 "syntactic.s" /* yacc.c:1646  */
+#line 126 "syntactic.s" /* yacc.c:1646  */
     {printf("REP PARAMETROS 1\n");
 							Lista* lst = createLista();
 							addLista(lst,(void*)(yyvsp[0]));
 							(yyval)=(int)lst;}
-#line 1558 "y.tab.c" /* yacc.c:1646  */
+#line 1559 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 130 "syntactic.s" /* yacc.c:1646  */
+#line 131 "syntactic.s" /* yacc.c:1646  */
     {printf("PARAMETRO\n");
 				char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 				strcpy(str,info.s);
 				(yyval) = (int)createParametro((Type*)(yyvsp[-1]),str);
 				}
-#line 1568 "y.tab.c" /* yacc.c:1646  */
+#line 1569 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 136 "syntactic.s" /* yacc.c:1646  */
+#line 137 "syntactic.s" /* yacc.c:1646  */
     {printf("BLOCO\n");
 																		(yyval)=(int)createBloco((Lista*)(yyvsp[-2]),(Lista*)(yyvsp[-1]));}
-#line 1575 "y.tab.c" /* yacc.c:1646  */
+#line 1576 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 140 "syntactic.s" /* yacc.c:1646  */
+#line 141 "syntactic.s" /* yacc.c:1646  */
     {printf("REP DEF_VARIAVEL 1\n");
 													addLista((Lista*)(yyvsp[0]),(void*)(yyvsp[-1]));
 													(yyval)=(int)(yyvsp[0]);}
-#line 1583 "y.tab.c" /* yacc.c:1646  */
+#line 1584 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 143 "syntactic.s" /* yacc.c:1646  */
+#line 144 "syntactic.s" /* yacc.c:1646  */
     {printf("REP DEF VARIAVEL 2\n");
 								(yyval)=(int)createLista();}
-#line 1590 "y.tab.c" /* yacc.c:1646  */
+#line 1591 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 146 "syntactic.s" /* yacc.c:1646  */
+#line 147 "syntactic.s" /* yacc.c:1646  */
     {printf("REP COMANDO 1\n");
 									addLista((Lista*)(yyvsp[0]),(void*)(yyvsp[-1]));
 									(yyval)=(int)(yyvsp[0]);}
-#line 1598 "y.tab.c" /* yacc.c:1646  */
+#line 1599 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 149 "syntactic.s" /* yacc.c:1646  */
+#line 150 "syntactic.s" /* yacc.c:1646  */
     {printf("REP COMANDO 2\n");
 						(yyval)=(int)createLista();}
-#line 1605 "y.tab.c" /* yacc.c:1646  */
+#line 1606 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 153 "syntactic.s" /* yacc.c:1646  */
+#line 154 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 1\n");
 			ComandoIf* comif;
 			if((yyvsp[0])==NULL){
@@ -1615,27 +1616,27 @@ yyreduce:
 			}
 			(yyval)=(int)createComando(IF_ELSE,comif);
 			}
-#line 1619 "y.tab.c" /* yacc.c:1646  */
+#line 1620 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 163 "syntactic.s" /* yacc.c:1646  */
+#line 164 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 2\n");
 			Comando* comwhile = createComandoWhile((Exp*)(yyvsp[-2]),(Comando*)(yyvsp[0]));
 			(yyval)=(int)createComando(WHILE,comwhile);}
-#line 1627 "y.tab.c" /* yacc.c:1646  */
+#line 1628 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 167 "syntactic.s" /* yacc.c:1646  */
+#line 168 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 3\n");
 			ComandoAssignment* comass=createComandoAssignment((Variavel*)(yyvsp[-3]),(Exp*)(yyvsp[-1]));
 			(yyval)=(int)createComando(ASSIGNMENT,comass);}
-#line 1635 "y.tab.c" /* yacc.c:1646  */
+#line 1636 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 171 "syntactic.s" /* yacc.c:1646  */
+#line 172 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 4\n");
 			ComandoReturn* comret;
 			if((yyvsp[-1])==NULL){
@@ -1645,363 +1646,363 @@ yyreduce:
 			}
 			(yyval)=(int)createComando(RETURN,comret);
 			}
-#line 1649 "y.tab.c" /* yacc.c:1646  */
+#line 1650 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 181 "syntactic.s" /* yacc.c:1646  */
+#line 182 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 5\n");
 			(yyval)=(int)createComando(C_CHAMADA,(void*)(yyvsp[-1]));
 			}
-#line 1657 "y.tab.c" /* yacc.c:1646  */
+#line 1658 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 185 "syntactic.s" /* yacc.c:1646  */
+#line 186 "syntactic.s" /* yacc.c:1646  */
     {printf("COMANDO 6\n");
 			(yyval)=(int)createComando(BLOCO,(void*)(yyvsp[0]));}
-#line 1664 "y.tab.c" /* yacc.c:1646  */
+#line 1665 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 188 "syntactic.s" /* yacc.c:1646  */
+#line 189 "syntactic.s" /* yacc.c:1646  */
     {printf("VAR 1 - %s\n",info.s);
 					char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 					strcpy(str,info.s);
 					(yyval)=(int)createVariavel(NORMAL,str);}
-#line 1673 "y.tab.c" /* yacc.c:1646  */
+#line 1674 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 192 "syntactic.s" /* yacc.c:1646  */
+#line 193 "syntactic.s" /* yacc.c:1646  */
     {printf("VAR 2\n");
 														(yyval)=(int)createVariavelVector((Exp*)(yyvsp[-3]),(Exp*)(yyvsp[-1]));}
-#line 1680 "y.tab.c" /* yacc.c:1646  */
+#line 1681 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 195 "syntactic.s" /* yacc.c:1646  */
+#line 196 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 1\n");
 					long int *i=(long int*)malloc(sizeof(long int));
 					*i=info.i;
 					ExpValue* expval = createExpValue(E_INT,i);
 					(yyval)=(int)createExp(VALUE,expval);}
-#line 1690 "y.tab.c" /* yacc.c:1646  */
+#line 1691 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 200 "syntactic.s" /* yacc.c:1646  */
+#line 201 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 2\n");
 						double* f=(double*)malloc(sizeof(double));
 						*f=info.f;
 						ExpValue* expval = createExpValue(E_FLOAT,f);
 						(yyval)=(int)createExp(VALUE,expval);}
-#line 1700 "y.tab.c" /* yacc.c:1646  */
+#line 1701 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 205 "syntactic.s" /* yacc.c:1646  */
+#line 206 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 3\n");
 					long int *i=(long int*)malloc(sizeof(long int));
 					*i=info.i;
 					ExpValue* expval = createExpValue(E_INT,i);
 					(yyval)=(int)createExp(VALUE,expval);
 					}
-#line 1711 "y.tab.c" /* yacc.c:1646  */
+#line 1712 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 211 "syntactic.s" /* yacc.c:1646  */
+#line 212 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 4\n");
 				char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 				strcpy(str,info.s);
 				(yyval)=(int)createExp(STRING,str);}
-#line 1720 "y.tab.c" /* yacc.c:1646  */
+#line 1721 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 215 "syntactic.s" /* yacc.c:1646  */
+#line 216 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 5\n");
 			(yyval)=createExp(VAR,(void*)(yyvsp[0]));
 			}
-#line 1728 "y.tab.c" /* yacc.c:1646  */
+#line 1729 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 218 "syntactic.s" /* yacc.c:1646  */
+#line 219 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 6\n");
 													(yyval)=(int)(yyvsp[-1]);}
-#line 1735 "y.tab.c" /* yacc.c:1646  */
+#line 1736 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 220 "syntactic.s" /* yacc.c:1646  */
+#line 221 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 7\n");
 				(yyval)=(int)createExp(CHAMADA,(void*)(yyvsp[0]));}
-#line 1742 "y.tab.c" /* yacc.c:1646  */
+#line 1743 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 222 "syntactic.s" /* yacc.c:1646  */
+#line 223 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 8\n");
 																ExpNew* expnew = createExpNew((Type*)(yyvsp[-3]),(Exp*)(yyvsp[-1]));
 																(yyval)=(int)createExp(NEW,expnew);}
-#line 1750 "y.tab.c" /* yacc.c:1646  */
+#line 1751 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 225 "syntactic.s" /* yacc.c:1646  */
+#line 226 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 19\n");
 				(yyval)=(int)createExp(UNARY,(void*)(yyvsp[0]));}
-#line 1757 "y.tab.c" /* yacc.c:1646  */
+#line 1758 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 227 "syntactic.s" /* yacc.c:1646  */
+#line 228 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 10\n");
 						(yyval)=(int)createExp(UNARY,(void*)(yyvsp[0]));}
-#line 1764 "y.tab.c" /* yacc.c:1646  */
+#line 1765 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 229 "syntactic.s" /* yacc.c:1646  */
+#line 230 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 10\n");
 				(yyval)=(int)createExp(BINARY,(void*)(yyvsp[0]));}
-#line 1771 "y.tab.c" /* yacc.c:1646  */
+#line 1772 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 231 "syntactic.s" /* yacc.c:1646  */
+#line 232 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 11\n");
 				(yyval)=(int)createExp(BINARY,(void*)(yyvsp[0]));}
-#line 1778 "y.tab.c" /* yacc.c:1646  */
+#line 1779 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 233 "syntactic.s" /* yacc.c:1646  */
+#line 234 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 12\n");
 				(yyval)=(int)createExp(BINARY,(void*)(yyvsp[0]));}
-#line 1785 "y.tab.c" /* yacc.c:1646  */
+#line 1786 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 235 "syntactic.s" /* yacc.c:1646  */
+#line 236 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 13\n");
 				(yyval)=(int)createExp(BINARY,(void*)(yyvsp[0]));}
-#line 1792 "y.tab.c" /* yacc.c:1646  */
+#line 1793 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 237 "syntactic.s" /* yacc.c:1646  */
+#line 238 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 14\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1799 "y.tab.c" /* yacc.c:1646  */
+#line 1800 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 239 "syntactic.s" /* yacc.c:1646  */
+#line 240 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 15\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1806 "y.tab.c" /* yacc.c:1646  */
+#line 1807 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 241 "syntactic.s" /* yacc.c:1646  */
+#line 242 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 16\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1813 "y.tab.c" /* yacc.c:1646  */
+#line 1814 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 243 "syntactic.s" /* yacc.c:1646  */
+#line 244 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 17\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1820 "y.tab.c" /* yacc.c:1646  */
+#line 1821 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 245 "syntactic.s" /* yacc.c:1646  */
+#line 246 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 18\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1827 "y.tab.c" /* yacc.c:1646  */
+#line 1828 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 247 "syntactic.s" /* yacc.c:1646  */
+#line 248 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 20\n");
 				(yyval)=(int)createExp(BOOLEAN,(void*)(yyvsp[0]));}
-#line 1834 "y.tab.c" /* yacc.c:1646  */
+#line 1835 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 249 "syntactic.s" /* yacc.c:1646  */
+#line 250 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP 21\n");
 				(yyval)=(int)createExp(COMP,(void*)(yyvsp[0]));}
-#line 1841 "y.tab.c" /* yacc.c:1646  */
+#line 1842 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 253 "syntactic.s" /* yacc.c:1646  */
+#line 254 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP NOT\n");
 								(yyval)=(int)createExpUnary(NOT,(Exp*)(yyvsp[0]));}
-#line 1848 "y.tab.c" /* yacc.c:1646  */
+#line 1849 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 256 "syntactic.s" /* yacc.c:1646  */
+#line 257 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP UNARY MINUS\n");
 															(yyval)=(int)createExpUnary(MINUS,(Exp*)(yyvsp[0]));}
-#line 1855 "y.tab.c" /* yacc.c:1646  */
+#line 1856 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 259 "syntactic.s" /* yacc.c:1646  */
+#line 260 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP ADD\n");
 										(yyval)=(int)createExpBinary(ADD,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1862 "y.tab.c" /* yacc.c:1646  */
+#line 1863 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 262 "syntactic.s" /* yacc.c:1646  */
+#line 263 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP SUB\n");
 										(yyval)=(int)createExpBinary(SUB,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1869 "y.tab.c" /* yacc.c:1646  */
+#line 1870 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 265 "syntactic.s" /* yacc.c:1646  */
+#line 266 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP MUL\n");
 										(yyval)=(int)createExpBinary(MUL,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1876 "y.tab.c" /* yacc.c:1646  */
+#line 1877 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 268 "syntactic.s" /* yacc.c:1646  */
+#line 269 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP DIV\n");
 										(yyval)=(int)createExpBinary(DIV,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1883 "y.tab.c" /* yacc.c:1646  */
+#line 1884 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 271 "syntactic.s" /* yacc.c:1646  */
+#line 272 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP COMP EQ\n");
 										(yyval)=(int)createExpComp(EQ,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1890 "y.tab.c" /* yacc.c:1646  */
+#line 1891 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 274 "syntactic.s" /* yacc.c:1646  */
+#line 275 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP COMP LESS EQ\n");
 										(yyval)=(int)createExpComp(LESS_EQ,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1897 "y.tab.c" /* yacc.c:1646  */
+#line 1898 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 277 "syntactic.s" /* yacc.c:1646  */
+#line 278 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP COMP GREATER EQ\n");
 										(yyval)=(int)createExpComp(GREATER_EQ,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1904 "y.tab.c" /* yacc.c:1646  */
+#line 1905 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 280 "syntactic.s" /* yacc.c:1646  */
+#line 281 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP COMP LESS\n");
 										(yyval)=(int)createExpComp(LESS,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1911 "y.tab.c" /* yacc.c:1646  */
+#line 1912 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 283 "syntactic.s" /* yacc.c:1646  */
+#line 284 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP COMP GREATER\n");
 										(yyval)=(int)createExpComp(GREATER,(Exp*)(yyvsp[-2]),(Exp*)(yyvsp[0]));}
-#line 1918 "y.tab.c" /* yacc.c:1646  */
+#line 1919 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 286 "syntactic.s" /* yacc.c:1646  */
+#line 287 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP BOOL AND\n");
 										(yyval)=(int)createExpBitwise(AND,(yyvsp[-2]),(yyvsp[0]));}
-#line 1925 "y.tab.c" /* yacc.c:1646  */
+#line 1926 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 289 "syntactic.s" /* yacc.c:1646  */
+#line 290 "syntactic.s" /* yacc.c:1646  */
     {printf("EXP BOOL OR\n");
 										(yyval)=(int)createExpBitwise(AND,(yyvsp[-2]),(yyvsp[0]));}
-#line 1932 "y.tab.c" /* yacc.c:1646  */
+#line 1933 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 294 "syntactic.s" /* yacc.c:1646  */
+#line 295 "syntactic.s" /* yacc.c:1646  */
     {printf("CHAMADA\n");
 			char* str = (char*)malloc(1+strlen(info.s)*sizeof(char));
 			strcpy(str,info.s);
 			(yyval)=(int)createChamada(str,(Lista*)(yyvsp[-1]));
 			}
-#line 1942 "y.tab.c" /* yacc.c:1646  */
+#line 1943 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 300 "syntactic.s" /* yacc.c:1646  */
+#line 301 "syntactic.s" /* yacc.c:1646  */
     {printf("LISTA_EXP 1\n");
 						(yyval)=(int)(yyvsp[0]);}
-#line 1949 "y.tab.c" /* yacc.c:1646  */
+#line 1950 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 302 "syntactic.s" /* yacc.c:1646  */
+#line 303 "syntactic.s" /* yacc.c:1646  */
     {printf("LISTA_EXP 2\n");
 						(yyval)=(int)NULL;}
-#line 1956 "y.tab.c" /* yacc.c:1646  */
+#line 1957 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 305 "syntactic.s" /* yacc.c:1646  */
+#line 306 "syntactic.s" /* yacc.c:1646  */
     {printf("REP EXP 1\n");
 				Lista* lst = createLista();
 				addLista(lst,(void*)(yyvsp[0]));
 				(yyval)=(int)lst;}
-#line 1965 "y.tab.c" /* yacc.c:1646  */
+#line 1966 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 309 "syntactic.s" /* yacc.c:1646  */
+#line 310 "syntactic.s" /* yacc.c:1646  */
     {printf("REP_EXP 2\n");
 								addLista((Lista*)(yyvsp[-2]),(void*)(yyvsp[0]));
 								(yyval)=(int)(yyvsp[-2]);}
-#line 1973 "y.tab.c" /* yacc.c:1646  */
+#line 1974 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 313 "syntactic.s" /* yacc.c:1646  */
+#line 314 "syntactic.s" /* yacc.c:1646  */
     {printf("ELSE 1\n");
 								(yyval)=(int)(yyvsp[0]);}
-#line 1980 "y.tab.c" /* yacc.c:1646  */
+#line 1981 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 315 "syntactic.s" /* yacc.c:1646  */
+#line 316 "syntactic.s" /* yacc.c:1646  */
     {printf("ELSE 2\n");
 						(yyval)=(int)NULL;}
-#line 1987 "y.tab.c" /* yacc.c:1646  */
+#line 1988 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 318 "syntactic.s" /* yacc.c:1646  */
+#line 319 "syntactic.s" /* yacc.c:1646  */
     {printf("OPT EXP 1\n");
 				(yyval)=(int)(yyvsp[0]);}
-#line 1994 "y.tab.c" /* yacc.c:1646  */
+#line 1995 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 320 "syntactic.s" /* yacc.c:1646  */
+#line 321 "syntactic.s" /* yacc.c:1646  */
     {printf("OPT EXP 2\n");
 						(yyval)=(int)NULL;}
-#line 2001 "y.tab.c" /* yacc.c:1646  */
+#line 2002 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2005 "y.tab.c" /* yacc.c:1646  */
+#line 2006 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2229,7 +2230,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 324 "syntactic.s" /* yacc.c:1906  */
+#line 325 "syntactic.s" /* yacc.c:1906  */
 
 extern char yytext[];
 #define YYDEBUG_LEXER_TEXT yytext
@@ -2238,7 +2239,7 @@ Info_t info;
 Programa* prog;
 int main (void) {
 	yyparse();
-	//printPrograma(prog);
+	printPrograma(prog,0);
 	return 0;
 }
 yyerror(s) char *s; {

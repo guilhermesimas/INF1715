@@ -1,7 +1,7 @@
 #ifndef _TREE_STRUCTURE_
 #define _TREE_STRUCTURE_
 
-#include"y.tab.h"
+#include "y.tab.h"
 
 extern int yylineno;
 
